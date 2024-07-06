@@ -31,8 +31,8 @@ const Logo = styled.img`
 `;
 
 const MapContainer = styled.div`
-    display: flex;
-    width: 100%
+    display: block;
+    width: 50%
     height: 100vh;
 `;
 
