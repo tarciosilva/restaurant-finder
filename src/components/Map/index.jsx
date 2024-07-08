@@ -36,9 +36,8 @@ export const MapContainer = (props) => {
     };
 
     service.textSearch(request, (results, status) => {
-      console.log(results);
-      console.log(request);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
+        orderByRating(results).reverse();
         dispatch(setRestaurants(results));
       }else {
         console.log("error");
@@ -83,12 +82,7 @@ export const MapContainer = (props) => {
     };
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        results.sort((a, b) => {
-          if (a?.rating && b?.rating) {
-            return a.rating < b.rating ? -1 : true;
-          } else return 1;
-          
-        }).reverse();
+        orderByRating(results).reverse();
         dispatch(setRestaurants(results));
       }
     });
@@ -120,6 +114,14 @@ export const MapContainer = (props) => {
     </Map>
   );
 };
+
+const orderByRating = (array) => {
+  return array.sort((a, b) => {
+    if (a?.rating && b?.rating) {
+      return a.rating < b.rating ? -1 : true;
+    } else return 1;
+  });
+}
 
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_API_KEY,

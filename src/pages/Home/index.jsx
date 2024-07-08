@@ -58,16 +58,26 @@ const Home = () => {
             <Loader />
           )}
         </SearchInput>
-        {restaurants.map((restaurant) => {
-          return (
-            <Card
-              key={restaurant.place_id}
-              restaurant={restaurant}
-              defaultImage={porsche}
-              onClick={() => handleOpenModal(restaurant.place_id)}
-            />
-          );
-        })}
+        {restaurants.length > 0 ? (
+          <Fragment>
+            {restaurants.map((restaurant) => {
+              return (
+                <Card
+                  key={restaurant.place_id}
+                  restaurant={restaurant}
+                  defaultImage={porsche}
+                  onClick={() => handleOpenModal(restaurant.place_id)}
+                />
+              );
+            })}
+          </Fragment>
+        ) : (
+          <div style={{marginTop:"5px"}}>
+            <Skeleton width={"10px"} height={"136px"} />
+            <Skeleton width={"10px"} height={"136px"} />
+            <Skeleton width={"10px"} height={"136px"} />
+          </div>
+        )}
       </Container>
 
       <MapContainer>
@@ -95,7 +105,6 @@ const Home = () => {
             <Skeleton width={"10px"} height={"10px"} />
             <Skeleton width={"10px"} height={"10px"} />
             <Skeleton width={"10px"} height={"10px"} />
-            
           </Fragment>
         )}
       </Modal>

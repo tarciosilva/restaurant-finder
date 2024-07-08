@@ -37,6 +37,7 @@ const CardImage = styled.img`
   object-fit: cover;
   width: 120px;
 `;
+
 const Card = ({ restaurant, defaultImage, onClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
