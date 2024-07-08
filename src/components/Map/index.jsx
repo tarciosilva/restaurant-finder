@@ -83,6 +83,12 @@ export const MapContainer = (props) => {
     };
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
+        results.sort((a, b) => {
+          if (a?.rating && b?.rating) {
+            return a.rating < b.rating ? -1 : true;
+          } else return 1;
+          
+        }).reverse();
         dispatch(setRestaurants(results));
       }
     });

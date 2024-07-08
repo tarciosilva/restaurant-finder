@@ -9,6 +9,7 @@ const Container = styled.div`
   border-left: 5px solid transparent;
   display: flex;
   justify-content: space-around;
+  opacity: ${(props) => (props.restaurant.opening_hours?.isOpen ? 1 : 0.2)};
   padding: 0.5rem;
   margin: 0.25rem 0;
   &:hover {
@@ -31,7 +32,7 @@ const TextTitle = styled.h2`
 const TextContent = styled.p``;
 const CardImage = styled.img`
   border-radius: 5px;
-  display: ${(props) => props.imageLoaded ? 'block' : 'none'});
+  display: ${(props) => (props.imageLoaded ? "block" : "none")});
   height: 120px;
   object-fit: cover;
   width: 120px;
@@ -39,7 +40,7 @@ const CardImage = styled.img`
 const Card = ({ restaurant, defaultImage, onClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
-    <Container onClick={onClick}>
+    <Container onClick={onClick} restaurant={restaurant}>
       <TextContainer>
         <TextTitle>{restaurant.name}</TextTitle>
         <ReactStars
@@ -60,7 +61,7 @@ const Card = ({ restaurant, defaultImage, onClick }) => {
         onLoad={() => setImageLoaded(true)}
         imageLoaded={imageLoaded}
       />
-      {!imageLoaded && <Skeleton width={"120px"} height={"120px"}/>}
+      {!imageLoaded && <Skeleton width={"120px"} height={"120px"} />}
     </Container>
   );
 };
